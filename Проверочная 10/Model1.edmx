@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище КнижкиModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Автор$">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Автор" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Вид$">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Вид" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Заказы">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название" Type="nvarchar" MaxLength="50" />
+          <Property Name="Количество" Type="int" />
+          <Property Name="Итог" Type="int" />
+          <Property Name="Дата" Type="date" />
+        </EntityType>
+        <EntityType Name="Книги$">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Вид" Type="int" />
+          <Property Name="Автор" Type="int" />
+          <Property Name="Название" Type="nvarchar" MaxLength="255" />
+          <Property Name="Описание" Type="nvarchar" MaxLength="255" />
+          <Property Name="Цена" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="Изображение" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK_Книги$_Автор$">
+          <End Role="Автор$" Type="Self.Автор$" Multiplicity="0..1" />
+          <End Role="Книги$" Type="Self.Книги$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Автор$">
+              <PropertyRef Name="Код" />
+            </Principal>
+            <Dependent Role="Книги$">
+              <PropertyRef Name="Автор" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Книги$_Вид$">
+          <End Role="Вид$" Type="Self.Вид$" Multiplicity="0..1" />
+          <End Role="Книги$" Type="Self.Книги$" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Вид$">
+              <PropertyRef Name="Код" />
+            </Principal>
+            <Dependent Role="Книги$">
+              <PropertyRef Name="Вид" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище КнижкиModelContainer">
+          <EntitySet Name="Автор$" EntityType="Self.Автор$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Вид$" EntityType="Self.Вид$" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Заказы" EntityType="Self.Заказы" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Книги$" EntityType="Self.Книги$" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Книги$_Автор$" Association="Self.FK_Книги$_Автор$">
+            <End Role="Автор$" EntitySet="Автор$" />
+            <End Role="Книги$" EntitySet="Книги$" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Книги$_Вид$" Association="Self.FK_Книги$_Вид$">
+            <End Role="Вид$" EntitySet="Вид$" />
+            <End Role="Книги$" EntitySet="Книги$" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="КнижкиModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Автор_">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Автор" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Книги_" Relationship="Self.FK_Книги__Автор_" FromRole="Автор_" ToRole="Книги_" />
+        </EntityType>
+        <EntityType Name="Вид_">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Вид" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Книги_" Relationship="Self.FK_Книги__Вид_" FromRole="Вид_" ToRole="Книги_" />
+        </EntityType>
+        <EntityType Name="Заказы">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Количество" Type="Int32" />
+          <Property Name="Итог" Type="Int32" />
+          <Property Name="Дата" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Книги_">
+          <Key>
+            <PropertyRef Name="Код" />
+          </Key>
+          <Property Name="Код" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Вид" Type="Int32" />
+          <Property Name="Автор" Type="Int32" />
+          <Property Name="Название" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Описание" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Цена" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="Изображение" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Автор_" Relationship="Self.FK_Книги__Автор_" FromRole="Книги_" ToRole="Автор_" />
+          <NavigationProperty Name="Вид_" Relationship="Self.FK_Книги__Вид_" FromRole="Книги_" ToRole="Вид_" />
+        </EntityType>
+        <Association Name="FK_Книги__Автор_">
+          <End Role="Автор_" Type="Self.Автор_" Multiplicity="0..1" />
+          <End Role="Книги_" Type="Self.Книги_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Автор_">
+              <PropertyRef Name="Код" />
+            </Principal>
+            <Dependent Role="Книги_">
+              <PropertyRef Name="Автор" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Книги__Вид_">
+          <End Role="Вид_" Type="Self.Вид_" Multiplicity="0..1" />
+          <End Role="Книги_" Type="Self.Книги_" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Вид_">
+              <PropertyRef Name="Код" />
+            </Principal>
+            <Dependent Role="Книги_">
+              <PropertyRef Name="Вид" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="КнижкиEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Автор_" EntityType="Self.Автор_" />
+          <EntitySet Name="Вид_" EntityType="Self.Вид_" />
+          <EntitySet Name="Заказы" EntityType="Self.Заказы" />
+          <EntitySet Name="Книги_" EntityType="Self.Книги_" />
+          <AssociationSet Name="FK_Книги__Автор_" Association="Self.FK_Книги__Автор_">
+            <End Role="Автор_" EntitySet="Автор_" />
+            <End Role="Книги_" EntitySet="Книги_" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Книги__Вид_" Association="Self.FK_Книги__Вид_">
+            <End Role="Вид_" EntitySet="Вид_" />
+            <End Role="Книги_" EntitySet="Книги_" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище КнижкиModelContainer" CdmEntityContainer="КнижкиEntities3">
+          <EntitySetMapping Name="Автор_">
+            <EntityTypeMapping TypeName="КнижкиModel.Автор_">
+              <MappingFragment StoreEntitySet="Автор$">
+                <ScalarProperty Name="Код" ColumnName="Код" />
+                <ScalarProperty Name="Автор" ColumnName="Автор" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Вид_">
+            <EntityTypeMapping TypeName="КнижкиModel.Вид_">
+              <MappingFragment StoreEntitySet="Вид$">
+                <ScalarProperty Name="Код" ColumnName="Код" />
+                <ScalarProperty Name="Вид" ColumnName="Вид" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Заказы">
+            <EntityTypeMapping TypeName="КнижкиModel.Заказы">
+              <MappingFragment StoreEntitySet="Заказы">
+                <ScalarProperty Name="Код" ColumnName="Код" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="Количество" ColumnName="Количество" />
+                <ScalarProperty Name="Итог" ColumnName="Итог" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Книги_">
+            <EntityTypeMapping TypeName="КнижкиModel.Книги_">
+              <MappingFragment StoreEntitySet="Книги$">
+                <ScalarProperty Name="Код" ColumnName="Код" />
+                <ScalarProperty Name="Вид" ColumnName="Вид" />
+                <ScalarProperty Name="Автор" ColumnName="Автор" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="Цена" ColumnName="Цена" />
+                <ScalarProperty Name="Изображение" ColumnName="Изображение" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

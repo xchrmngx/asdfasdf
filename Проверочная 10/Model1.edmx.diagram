@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="746fdda2924e4722ad09696c52156461" Name="Diagram1">
+        <EntityTypeShape EntityType="КнижкиModel.Автор_" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="КнижкиModel.Вид_" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="КнижкиModel.Заказы" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="КнижкиModel.Книги_" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="КнижкиModel.FK_Книги__Автор_" ManuallyRouted="false" />
+        <AssociationConnector Association="КнижкиModel.FK_Книги__Вид_" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
